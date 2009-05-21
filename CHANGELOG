@@ -1,0 +1,8 @@
+????-??-??  NuElectronics  <info@nuelectronics.com>
+ * Initial release based on AVRFreaks code
+
+2009-05-21  Jonathan Oxer  <jon@oxer.com.au>
+ * Added basic README and CHANGELOG
+ * Cleaned up syntax in examples to follow Arduino coding standards
+ * Replaced hard-coded port 80 value in examples with mywwwport
+ * Fixed case-mismatch in references to etherShield.h
