@@ -1,0 +1,63 @@
+etherShield Library for Arduino
+===============================
+This library provides Arduino support for the EtherShield from
+nuelectronics. More information about the EtherShield is available at:
+
+ http://www.nuelectronics.com/estore/?p=12
+
+
+Installation
+============
+Download the ethershield library from:
+
+ http://www.nuelectronics.com/download/projects/etherShield.zip
+
+Unzip the library in your Arduino IDE library directory inside the
+hardware directory of your Arduino installation. For example:
+
+ arduino-0015/hardware/libraries/
+
+There are six examples in the etherShield library. You may need to
+change the IP address in the example sketch (.pde) files. The IP
+address must be a free address with your network range.
+
+  static uint8_t mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x24};
+  static uint8_t myip[4] = {192,168,1,15};
+  static char baseurl[] = "http://192.168.1.15/";
+
+Also you might like to change the webpage contents in the print_webpage
+function. Note that the webpage contents are stored in the PROGMEM
+(using PSTR declaration) to save precious SRAM space.
+
+
+Library Structure
+=================
+The library is based on tuxgraphics.org's TCP/IP stack for the Atmega88
+and ENC28J60. The main files in the library are:
+
+ etherShield.cpp   Wrapper cpp file, as an Arduino library interface
+                   with tuxgraphic's code
+
+ ip_arp_udp_tcp.c  Simplified TCP/IP stack implementation
+
+ enc28j60.c        ENC28J60 SPI routines
+
+ net.h             Network protocol definitions
+
+
+TCP/IP Implementation
+=====================
+The standard TCP is a protocl to establish a connection. To do this, a
+number of packets needs to be exchaged between two sides first to
+establish the connection; then data packets can be exchaged. Usually a
+complicated state-machine is needed to implement the TCP protocol.
+
+For Auduino's ATMEGA168, a 8-bit AVR microcontroller with 1K SRAM, it is
+impossible to implement the full TCP stack. Also the webpage for 8-bit
+microcontroller that normally is used to control a relay or read a
+temperature sensor etc., is very simple. Therefore, instead of
+implementing the full TCP protocol a single data packet TCP protocol is
+used. Your webpage contents, including all html tags, must be in one
+packet. The length of packet is limited by the SRAM size. Currently half
+of the RAM space (500 bytes) is used for network Packet buffer which is
+sufficient for simple webpages as shown in the examples.
