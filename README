@@ -47,17 +47,17 @@ and ENC28J60. The main files in the library are:
 
 TCP/IP Implementation
 =====================
-The standard TCP is a protocl to establish a connection. To do this, a
+The TCP standard is a protocol to establish a connection. To do this, a
 number of packets needs to be exchaged between two sides first to
-establish the connection; then data packets can be exchaged. Usually a
-complicated state-machine is needed to implement the TCP protocol.
+establish the connection; then data packets can be exchanged. Usually a
+complicated state-machine is needed to implement the full TCP protocol.
 
-For Auduino's ATMEGA168, a 8-bit AVR microcontroller with 1K SRAM, it is
-impossible to implement the full TCP stack. Also the webpage for 8-bit
-microcontroller that normally is used to control a relay or read a
-temperature sensor etc., is very simple. Therefore, instead of
-implementing the full TCP protocol a single data packet TCP protocol is
-used. Your webpage contents, including all html tags, must be in one
-packet. The length of packet is limited by the SRAM size. Currently half
-of the RAM space (500 bytes) is used for network Packet buffer which is
-sufficient for simple webpages as shown in the examples.
+For Arduino's ATMEGA168, an 8-bit AVR microcontroller with only 1K SRAM,
+it is impossible to implement the full TCP stack. However, a webpage
+for to control a relay or read a temperature sensor etc, is very simple.
+Therefore, instead of implementing the full TCP protocol a single data
+packet TCP protocol is used. Your webpage contents, including all HTML
+tags, must fit within a single packet. The length of packet is limited
+by the SRAM size. Currently half of the RAM space (500 bytes) is used
+for the network packet buffer which is sufficient for simple webpages as
+shown in the included examples.
