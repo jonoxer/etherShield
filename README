@@ -1,16 +1,26 @@
 etherShield Library for Arduino
 ===============================
 This library provides Arduino support for the EtherShield from
-nuelectronics. More information about the EtherShield is available at:
+nuelectronics as well as other boards based on the same design.
 
- http://www.nuelectronics.com/estore/?p=12
+Compatible boards include:
+
+ * nuelectronics Ethernet Shield
+ http://www.nuelectronics.com/estore/index.php?main_page=product_info&cPath=1&products_id=4
+
+ * Seeed Studios Ethernet Adaptor
+ http://www.seeedstudio.com/depot/ethernet-adapter-for-mcu-projects-p-160.html
 
 
 Installation
 ============
-Download the ethershield library from:
+The etherShield library can be downloaded from:
 
  http://www.nuelectronics.com/download/projects/etherShield.zip
+
+Updated versions of the library can also be obtained from github:
+
+ http://github.com/jonoxer/etherShield/tree/master
 
 Unzip the library in your Arduino IDE library directory inside the
 hardware directory of your Arduino installation. For example:
@@ -18,16 +28,17 @@ hardware directory of your Arduino installation. For example:
  arduino-0015/hardware/libraries/
 
 There are six examples in the etherShield library. You may need to
-change the IP address in the example sketch (.pde) files. The IP
-address must be a free address with your network range.
+change the IP address in the example sketch (.pde) files to an
+available address within your network range. Each example sketch begins
+with network configuration values similar to:
 
   static uint8_t mymac[6] = {0x54,0x55,0x58,0x10,0x00,0x24};
-  static uint8_t myip[4] = {192,168,1,15};
-  static char baseurl[] = "http://192.168.1.15/";
+  static uint8_t myip[4]  = {192,168,1,15};
+  static char baseurl[]   = "http://192.168.1.15/";
 
-Also you might like to change the webpage contents in the print_webpage
-function. Note that the webpage contents are stored in the PROGMEM
-(using PSTR declaration) to save precious SRAM space.
+You may also like to change the webpage contents in the print_webpage
+function. Note that webpage contents are stored in the PROGMEM (using
+the PSTR declaration) to save precious SRAM space.
 
 
 Library Structure
@@ -36,7 +47,7 @@ The library is based on tuxgraphics.org's TCP/IP stack for the Atmega88
 and ENC28J60. The main files in the library are:
 
  etherShield.cpp   Wrapper cpp file, as an Arduino library interface
-                   with tuxgraphic's code
+                   for tuxgraphic's code
 
  ip_arp_udp_tcp.c  Simplified TCP/IP stack implementation
 
@@ -54,7 +65,7 @@ complicated state-machine is needed to implement the full TCP protocol.
 
 For Arduino's ATMEGA168, an 8-bit AVR microcontroller with only 1K SRAM,
 it is impossible to implement the full TCP stack. However, a webpage
-for to control a relay or read a temperature sensor etc, is very simple.
+to control a relay or read a temperature sensor etc, is very simple.
 Therefore, instead of implementing the full TCP protocol a single data
 packet TCP protocol is used. Your webpage contents, including all HTML
 tags, must fit within a single packet. The length of packet is limited
