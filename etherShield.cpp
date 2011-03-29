@@ -49,6 +49,10 @@ void EtherShield::ES_make_arp_answer_from_request(uint8_t *buf){
 	make_arp_answer_from_request(buf);
 }
 
+void EtherShield::ES_make_udp_reply_from_request(uint8_t *buf,uint8_t *data,uint8_t datalen,uint16_t port){
+	make_udp_reply_from_request(buf, data, datalen, port);
+}
+
 uint8_t EtherShield::ES_eth_type_is_ip_and_my_ip(uint8_t *buf,uint16_t len){
 	return eth_type_is_ip_and_my_ip(buf, len);
 }
