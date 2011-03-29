@@ -363,7 +363,7 @@ void make_echo_reply_from_request(uint8_t *buf,uint16_t len)
 }
 
 // you can send a max of 220 bytes of data
-void make_udp_reply_from_request(uint8_t *buf,char *data,uint8_t datalen,uint16_t port)
+void make_udp_reply_from_request(uint8_t *buf,uint8_t *data,uint8_t datalen,uint16_t port)
 {
         uint8_t i=0;
         uint16_t ck;
