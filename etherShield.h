@@ -40,6 +40,7 @@ class EtherShield
 		void ES_init_ip_arp_udp_tcp(uint8_t *mymac,uint8_t *myip,uint8_t wwwp);
 		uint8_t ES_eth_type_is_arp_and_my_ip(uint8_t *buf,uint16_t len);
 		void ES_make_arp_answer_from_request(uint8_t *buf);
+		void ES_make_udp_reply_from_request(uint8_t *buf,uint8_t *data,uint8_t datalen,uint16_t port);
 		uint8_t ES_eth_type_is_ip_and_my_ip(uint8_t *buf,uint16_t len);
 		void ES_make_echo_reply_from_request(uint8_t *buf,uint16_t len);
 		void ES_make_tcp_synack_from_syn(uint8_t *buf);
