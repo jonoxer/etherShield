@@ -15,7 +15,12 @@
 #include <avr/io.h>
 //#include "avr_compat.h"
 #include "enc28j60.h"
-#include "WConstants.h"  //all things wiring / arduino
+
+#if ARDUINO >= 100
+ #include "Arduino.h"	  //all things wiring / arduino
+#else
+ #include "WProgram.h"
+#endif
 //#include "timeout.h"
 //
 //#define F_CPU 10000000UL  // 12.5 MHz
