@@ -276,6 +276,11 @@ uint8_t enc28j60getrev(void)
 
 void enc28j60PacketSend(uint16_t len, uint8_t* packet)
 {
+	// Reset the transmit logic problem. See Errata point 12 for all chip revs
+	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRST);
+	enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRST);
+	enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, EIR, EIR_TXERIF);
+	
 	// Set the write pointer to start of transmit buffer area
 	enc28j60Write(EWRPTL, TXSTART_INIT&0xFF);
 	enc28j60Write(EWRPTH, TXSTART_INIT>>8);
@@ -288,10 +293,6 @@ void enc28j60PacketSend(uint16_t len, uint8_t* packet)
 	enc28j60WriteBuffer(len, packet);
 	// send the contents of the transmit buffer onto the network
 	enc28j60WriteOp(ENC28J60_BIT_FIELD_SET, ECON1, ECON1_TXRTS);
-        // Reset the transmit logic problem. See Rev. B4 Silicon Errata point 12.
-	if( (enc28j60Read(EIR) & EIR_TXERIF) ){
-                enc28j60WriteOp(ENC28J60_BIT_FIELD_CLR, ECON1, ECON1_TXRTS);
-        }
 }
 
 // Gets a packet from the network receive buffer, if one is available.
