@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-EtherShield KEYWORD1
+EtherShield	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
